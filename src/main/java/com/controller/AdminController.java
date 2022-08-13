@@ -302,7 +302,7 @@ public class AdminController {
 
     @RequestMapping("myQueryArticleByCond")
     public String myQueryArticleByCond(String cond,String name){
-        
+        System.out.println("我是你爹");
         return "";
     }
 
