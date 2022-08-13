@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.ArticleMapper">
+    <resultMap type="article" id="articleMap">
+        <id property="articleid" column="articleid" />
+        <result property="title" column="title" />
+        <result property="bannerid" column="bannerid" />
+        <result property="image" column="image" />
+        <result property="contents" column="contents" />
+        <result property="addtime" column="addtime" />
+        <result property="hits" column="hits" />
+        <result property="bannername" column="bannername" />
+    </resultMap>
+
+    <insert id="addArticle">
+        insert into article(articleid, title, bannerid, image, contents, addtime, hits)
+        values (#{articleid}, #{title}, #{bannerid}, #{image}, #{contents}, #{addtime}, #{hits})
+    </insert>
+    <update id="updateArticle">
+        update `article`
+        set `title`=#{title},
+            `bannerid`=#{bannerid},
+            `image`=#{image},
+            contents=#{contents}
+        where articleid = #{articleid}
+    </update>
+    <delete id="deleteArticle">
+        delete from `article` where articleid = #{id}
+    </delete>
+    <select id="getArticle" resultMap="articleMap">
+        select a.* , b.bannername from article a , banner b where a.bannerid = b.bannerid order by articleid desc
+    </select>
+    <select id="getArticleById" resultType="article">
+        select *
+        from `article`
+        where articleid = #{id}
+    </select>
+</mapper>
